@@ -1,3 +1,4 @@
+using Phoneword.SharedProject.Services.Interfaces;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Calls;
@@ -5,7 +6,7 @@ using Windows.UI.Popups;
 
 namespace Phoneword.UWP.Services
 {
-    public class PhoneDialerService
+    public class PhoneDialerService : IPhoneDialerService
     {
         bool _dialled = false;
 

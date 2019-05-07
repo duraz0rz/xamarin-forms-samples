@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Phoneword.UWP.Services
+namespace Phoneword.SharedProject.Services
 {
     public static class PhonewordTranslatorService
     {

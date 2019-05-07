@@ -2,7 +2,10 @@
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Phoneword.SharedProject.Views;
 using Phoneword.iOS.Views;
+using Autofac;
+using Phoneword.iOS.Services;
 
 namespace Phoneword.iOS
 {
@@ -10,6 +13,7 @@ namespace Phoneword.iOS
     public class AppDelegate : UIApplicationDelegate
     {
         public static AppDelegate Instance;
+        public static IContainer Container;
 
         UIWindow _window;
         UINavigationController _navigation;
@@ -26,12 +30,17 @@ namespace Phoneword.iOS
                 TextColor = UIColor.Black
             });
 
-            var mainPage = new PhonewordPage().CreateViewController();
-            mainPage.Title = "Phoneword";
+            BuildIoCContainer();
 
-            _navigation = new UINavigationController(mainPage);
-            _window.RootViewController = _navigation;
-            _window.MakeKeyAndVisible();
+            using (var scope = Container.BeginLifetimeScope())
+            {
+                var mainPage = scope.Resolve<PhonewordPage>().CreateViewController();
+                mainPage.Title = "Phoneword";
+
+                _navigation = new UINavigationController(mainPage);
+                _window.RootViewController = _navigation;
+                _window.MakeKeyAndVisible();
+            }
 
             return true;
         }
@@ -41,6 +50,16 @@ namespace Phoneword.iOS
             var callHistoryPage = new CallHistoryPage().CreateViewController();
             callHistoryPage.Title = "Call History";
             _navigation.PushViewController(callHistoryPage, true);
+        }
+
+        private void BuildIoCContainer()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<PhoneDialerService>().AsImplementedInterfaces();
+            builder.RegisterType<PhonewordPage>().AsSelf();
+
+            Container = builder.Build();
         }
     }
 }

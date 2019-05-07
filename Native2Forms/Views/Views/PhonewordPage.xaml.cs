@@ -1,19 +1,22 @@
-﻿using System;
+﻿using Phoneword.SharedProject.Models;
+using Phoneword.SharedProject.Services;
+using Phoneword.SharedProject.Services.Interfaces;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Phoneword.iOS.Models;
-using Phoneword.iOS.Services;
 
-namespace Phoneword.iOS.Views
+namespace Phoneword.SharedProject.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PhonewordPage : ContentPage
     {
         string _translatedNumber;
+        private readonly IPhoneDialerService _phoneDialerService;
 
-        public PhonewordPage()
+        public PhonewordPage(IPhoneDialerService phoneDialerService)
         {
             InitializeComponent();
+            _phoneDialerService = phoneDialerService;
         }
 
         void OnTranslate(object sender, EventArgs e)
@@ -33,25 +36,21 @@ namespace Phoneword.iOS.Views
 
         async void OnCall(object sender, EventArgs e)
         {
-            if (await this.DisplayAlert(
+            if (await DisplayAlert(
                     "Dial a Number",
                     "Would you like to call " + _translatedNumber + "?",
                     "Yes",
                     "No"))
             {
-                var dialer = new PhoneDialerService();
-                if (dialer != null)
-                {
-                    AppModel.PhoneNumbers.Add(_translatedNumber);
-                    callHistoryButton.IsEnabled = true;
-                    bool result = dialer.Dial(_translatedNumber);
-                }
+                AppModel.PhoneNumbers.Add(_translatedNumber);
+                callHistoryButton.IsEnabled = true;
+                _phoneDialerService.Dial(_translatedNumber);
             }
         }
 
         void OnCallHistory(object sender, EventArgs e)
         {
-            AppDelegate.Instance.NavigateToCallHistoryPage();
+            //Phoneword.UWP.MainPage.Instance.NavigateToCallHistoryPage();
         }
     }
 }

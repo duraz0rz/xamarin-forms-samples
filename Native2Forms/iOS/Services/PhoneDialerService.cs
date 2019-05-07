@@ -1,9 +1,10 @@
 using Foundation;
+using Phoneword.SharedProject.Services.Interfaces;
 using UIKit;
 
 namespace Phoneword.iOS.Services
 {
-    public class PhoneDialerService
+    public class PhoneDialerService : IPhoneDialerService
     {
         public bool Dial(string number)
         {

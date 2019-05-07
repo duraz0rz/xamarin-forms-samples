@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using Phoneword.SharedProject.Views;
+using Phoneword.UWP.Services;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
@@ -13,6 +16,8 @@ namespace Phoneword.UWP
     /// </summary>
     sealed partial class App : Application
     {
+        public IContainer Container;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -31,6 +36,8 @@ namespace Phoneword.UWP
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
+
+            BuildIoCContainer();
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -107,6 +114,16 @@ namespace Phoneword.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private void BuildIoCContainer()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<PhoneDialerService>().AsImplementedInterfaces();
+            builder.RegisterType<PhonewordPage>().AsSelf();
+
+            Container = builder.Build();
         }
     }
 }

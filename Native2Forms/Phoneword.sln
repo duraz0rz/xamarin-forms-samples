@@ -7,7 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoneword.iOS", "iOS\Phonew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoneword.UWP", "UWP\Phoneword.UWP.csproj", "{8362EFF5-20BC-44A8-AD2D-B09B2EDEE418}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedProject", "Views\SharedProject.shproj", "{8D5FD8B9-3E63-4F00-BDFD-DC84ADC56020}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Views\Views.projitems*{32cc48b4-0a57-4c14-815c-dbceb973a46b}*SharedItemsImports = 4
+		Views\Views.projitems*{8362eff5-20bc-44a8-ad2d-b09b2edee418}*SharedItemsImports = 4
+		Views\Views.projitems*{8d5fd8b9-3e63-4f00-bdfd-dc84adc56020}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|ARM = Ad-Hoc|ARM
