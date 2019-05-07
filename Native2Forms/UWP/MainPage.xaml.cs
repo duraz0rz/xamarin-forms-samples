@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Phoneword.SharedProject.Views;
-using Phoneword.UWP.Views;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -22,11 +21,6 @@ namespace Phoneword.UWP
             var app = Application.Current as App;
             var phonewordPage = app.Container.Resolve<PhonewordPage>();
             this.Content = phonewordPage.CreateFrameworkElement();
-        }
-
-        public void NavigateToCallHistoryPage()
-        {
-            this.Frame.Navigate(new CallHistoryPage());
         }
     }
 }

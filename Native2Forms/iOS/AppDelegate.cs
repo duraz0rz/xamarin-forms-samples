@@ -3,7 +3,6 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Phoneword.SharedProject.Views;
-using Phoneword.iOS.Views;
 using Autofac;
 using Phoneword.iOS.Services;
 
@@ -16,7 +15,7 @@ namespace Phoneword.iOS
         public static IContainer Container;
 
         UIWindow _window;
-        UINavigationController _navigation;
+        public UINavigationController NavigationController;
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
@@ -37,25 +36,19 @@ namespace Phoneword.iOS
                 var mainPage = scope.Resolve<PhonewordPage>().CreateViewController();
                 mainPage.Title = "Phoneword";
 
-                _navigation = new UINavigationController(mainPage);
-                _window.RootViewController = _navigation;
+                NavigationController = new UINavigationController(mainPage);
+                _window.RootViewController = NavigationController;
                 _window.MakeKeyAndVisible();
             }
 
             return true;
         }
 
-        public void NavigateToCallHistoryPage()
-        {
-            var callHistoryPage = new CallHistoryPage().CreateViewController();
-            callHistoryPage.Title = "Call History";
-            _navigation.PushViewController(callHistoryPage, true);
-        }
-
         private void BuildIoCContainer()
         {
             var builder = new ContainerBuilder();
 
+            builder.RegisterType<NavigationService>().AsImplementedInterfaces();
             builder.RegisterType<PhoneDialerService>().AsImplementedInterfaces();
             builder.RegisterType<PhonewordPage>().AsSelf();
 

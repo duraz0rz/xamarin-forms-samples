@@ -12,11 +12,13 @@ namespace Phoneword.SharedProject.Views
     {
         string _translatedNumber;
         private readonly IPhoneDialerService _phoneDialerService;
+        private readonly INavigationService _navigationService;
 
-        public PhonewordPage(IPhoneDialerService phoneDialerService)
+        public PhonewordPage(IPhoneDialerService phoneDialerService, INavigationService navigationService)
         {
             InitializeComponent();
             _phoneDialerService = phoneDialerService;
+            _navigationService = navigationService;
         }
 
         void OnTranslate(object sender, EventArgs e)
@@ -50,7 +52,7 @@ namespace Phoneword.SharedProject.Views
 
         void OnCallHistory(object sender, EventArgs e)
         {
-            //Phoneword.UWP.MainPage.Instance.NavigateToCallHistoryPage();
+            _navigationService.NavigateToCallHistory();
         }
     }
 }

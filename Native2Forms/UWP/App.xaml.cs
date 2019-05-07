@@ -120,6 +120,7 @@ namespace Phoneword.UWP
         {
             var builder = new ContainerBuilder();
 
+            builder.RegisterType<NavigationService>().AsImplementedInterfaces();
             builder.RegisterType<PhoneDialerService>().AsImplementedInterfaces();
             builder.RegisterType<PhonewordPage>().AsSelf();
 

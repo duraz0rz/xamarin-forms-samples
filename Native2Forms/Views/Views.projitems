@@ -9,19 +9,23 @@
     <Import_RootNamespace>Phoneword.SharedProject</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CallHistoryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\PhonewordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\AppModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Interfaces\INavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Interfaces\IPhoneDialerService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\PhoneTranslatorService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CallHistoryPage.xaml.cs">
+      <DependentUpon>CallHistoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\PhonewordPage.xaml.cs">
       <DependentUpon>PhonewordPage.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
   </ItemGroup>
 </Project>
