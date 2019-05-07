@@ -5,6 +5,7 @@ using Xamarin.Forms.Platform.iOS;
 using Phoneword.SharedProject.Views;
 using Autofac;
 using Phoneword.iOS.Services;
+using Phoneword.SharedProject;
 
 namespace Phoneword.iOS
 {
@@ -50,7 +51,8 @@ namespace Phoneword.iOS
 
             builder.RegisterType<NavigationService>().AsImplementedInterfaces();
             builder.RegisterType<PhoneDialerService>().AsImplementedInterfaces();
-            builder.RegisterType<PhonewordPage>().AsSelf();
+
+            builder.RegisterModule<CommonModule>();
 
             Container = builder.Build();
         }

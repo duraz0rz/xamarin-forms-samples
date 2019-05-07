@@ -17,6 +17,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CommonModule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AppModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Interfaces\INavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Interfaces\IPhoneDialerService.cs" />

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Phoneword.SharedProject;
 using Phoneword.SharedProject.Views;
 using Phoneword.UWP.Services;
 using System;
@@ -122,7 +123,8 @@ namespace Phoneword.UWP
 
             builder.RegisterType<NavigationService>().AsImplementedInterfaces();
             builder.RegisterType<PhoneDialerService>().AsImplementedInterfaces();
-            builder.RegisterType<PhonewordPage>().AsSelf();
+
+            builder.RegisterModule<CommonModule>();
 
             Container = builder.Build();
         }
