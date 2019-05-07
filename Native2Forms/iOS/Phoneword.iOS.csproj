@@ -115,7 +115,7 @@
     <Compile Include="Services\PhoneDialerService.cs" />
     <Compile Include="Models\AppModel.cs" />
   </ItemGroup>
-  <Import Project="..\Views\Views.projitems" Label="Shared" />
+  <Import Project="..\SharedProject\SharedProject.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup />
